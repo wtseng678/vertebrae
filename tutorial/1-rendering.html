@@ -40,6 +40,8 @@ var renderSomethingOnThePage = function(message) {
    * _Look below for one possible solution._
    */
 
+   // add classes to the first div and put css styling for those classes
+
   /* Here is the jQuery call to append this html string to the page's body.
    * Each time this function is called, the whole template defined above
    * is 'rendered', or drawn, with the message you pass to
@@ -49,15 +51,14 @@ var renderSomethingOnThePage = function(message) {
 };
 
 // Let's try it out:
-renderSomethingOnThePage(
-  'This is an example of how to use our rendering method.');
+renderSomethingOnThePage('This is an example of how to use our rendering method.');
 
 /* Here are a few more examples. Every call to our rendering function (above)
  * will draw something to the page using the template defined in that function:
  */
 
-// renderSomethingOnThePage('Each additional message you give this function...');
-// renderSomethingOnThePage('...will draw a new message on the page!');
+renderSomethingOnThePage('Each additional message you give this function...');
+renderSomethingOnThePage('...will draw a new message on the page!');
 
 /* Let's revisit what we have learned from the last exercise.
  * We are working with a different application this time - we are going to be
@@ -101,7 +102,7 @@ var Message = Backbone.Model.extend({
      * Putting it into the initialize function let's us be sure that
      * all models that are created will have event listeners on them.
      */
-    this.on(YOUR CODE HERE);
+    this.on('change', function(e) { renderSomethingOnThePage(e.changed.message); });
     /* It is your turn to write the event handler.
      *
      * Make an event listener that will listen for a `change` in this model's
@@ -141,6 +142,8 @@ var myNewMessage = new Message();
 
 // ...and then make a change on that model to see it render
 myNewMessage.set({message: 'someMessage'});
+
+myNewMessage.alertThisMessage();
 
 
 /* Once the model is rendering on the `change` event, move on to step 3!
